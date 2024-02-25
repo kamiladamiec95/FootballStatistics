@@ -1,7 +1,8 @@
 menu = (
     "1. Import files\n"
     "2. Change files' folder path\n"
-    "3. Quit\n"
+    "3. Add leagues\n"
+    "4. Quit\n"
 )
 
 
