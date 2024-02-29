@@ -1,8 +1,9 @@
 menu = (
-    "1. Import files\n"
-    "2. Change files' folder path\n"
-    "3. Add leagues\n"
-    "4. Quit\n"
+    "1. Import events files\n"
+    "2. Import matches files\n"
+    "3. Change files' folder path\n"
+    "4. Add leagues\n"
+    "5. Quit\n"
 )
 
 
