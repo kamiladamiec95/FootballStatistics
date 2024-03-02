@@ -1,45 +1,43 @@
 import pyodbc
+import sqlalchemy
+import pandas as pd
 
 def connect_to_db():
-    conn_str = (
-        "Driver={SQL Server};"
-        "Server=DESKTOP-DVUVJ0H;"
-        "Database=FootballStatistics;"
-        "Trusted_Connection=yes;"
-    )
-    try:
-        conn = pyodbc.connect(conn_str)
-        print("Connected to database")
-        return conn
-    except Exception as e:
-        print("Can't connect with database, check connection parameters")
-        print(f"Error: {e}")
-        exit()
+    engine = sqlalchemy.create_engine('mssql+pyodbc://@DESKTOP-DVUVJ0H/FootballStatistics?trusted_connection=yes&driver=ODBC+Driver+17+for+SQL+Server')
+    return engine
 
-def add_event(event, player, home_team, away_team, event_team, match_external_id, league):
-    with connect_to_db() as conn:
-        sql = f"EXEC {league}.AddRawData ?, ?, ?, ?, ?, ?"
-        cursor = conn.cursor()
-        cursor.execute(sql, event, player, home_team, away_team, event_team, match_external_id, league)
-        conn.commit()
+def add_event(events, league):
+    with connect_to_db().begin() as conn:
+        events = events.rename(columns={"events_event": "Event", "events_player": "Player", "events_event_team": "Team", "external_match_id": "MatchExternalId"})
+        events = events.drop(columns=["league", "away_team", "home_team"])
+        events.to_sql(name="RawData", if_exists='append', con=conn, index=False, schema=f"{league}")
 
+def add_match(events, league):
+    print(events)
+    for index, row in events.iterrows():
+        home_team = row["home_team"]
+        away_team = row["away_team"]
+        is_finished = row["is_finished"]
+        external_match_id = row["external_match_id"]
+        query = f"EXEC {league}.AddMatch @HomeTeamName='%s', @AwayTeamName='%s', @MatchExternalId='%s', @IsFinished='%s'" % (home_team, away_team, external_match_id, is_finished)
+        with connect_to_db().begin() as conn:
+            conn.execute(sqlalchemy.text(query))
+
+def read_matches(league):
+    query = f"SELECT * FROM {league}.Matches"
+    with connect_to_db().begin() as conn:
+        df = pd.read_sql(query, conn)
+      
 def add_leagues(league):
-    with connect_to_db() as conn:
-        # for league in leagues:
-        # sql = "EXEC dbo.AddLeague ?"
-        # data = list( (row,) for row in leagues)
-        # print(data)
+    with connect_to_db().begin() as conn:
         cursor = conn.cursor()
-        # cursor.executemany(sql, data)
         cursor.execute("EXEC dbo.AddLeague ?", league)
         conn.commit()              
 
-def add_team(short_name, long_name, founding_date, address, league):
-    with connect_to_db() as conn:
-        sql = f"EXEC {league}.AddTeam ?, ?, ?, ?"
-        cursor = conn.cursor()
-        cursor.execute(sql, short_name, long_name, founding_date, address, league)
-        conn.commit()
+def add_team(teams, league):
+    with connect_to_db().begin() as conn:
+        teams = teams.rename(columns={"short_name": "ShortName", "long_name": "LongName", "founding_date": "FoundingDate", "addres": "Address"})
+        teams.to_sql(name="Teams", if_exists='append', con=conn, index=False, schema=f"{league}")
 
 def create_db():
     conn_str = (

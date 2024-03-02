@@ -1,44 +1,47 @@
 import menu
 import operations
-import pyodbc
-import db
 
-# cnxn = pyodbc.connect("Driver={SQL Server};"
-#                       "Server=DESKTOP-DVUVJ0H;"
-#                       "Database=test;"
-#                       "Trusted_Connection=yes;")
-
-# cursor = cnxn.cursor()
-# cursor.execute('SELECT getdate()')
-# print(cursor)
-
-# query = 'SELECT 234'
-
-# cursor.execute('select 123')
-# print(cursor.fetchall())
-# cnxn.close()
 class Manager:
 
     def __init__(self):
         self.is_running = True
         self.choices = {
-            #"2": operations.change_file_path,
+            "1": operations.read_and_archive_raw_data_json,
+            "2": operations.read_and_archive_teams_json,
             "3": operations.add_leagues_from_file,
-            "4": self.quit
+            "5": self.display_sub_menu_settings,
+            "6": self.quit
+        }
+        self.choices_sub_menu_settings = {
+            "1": self.sub_menu_change_event_files_path,
+            "2": self.sub_menu_change_match_files_path
         }
         self.start()
 
     def start(self):
         while self.is_running:
-            # db.add_event()
-            
             menu.show_menu()
             user_choice = menu.get_choice()
-            self.choices.get(user_choice)()
-            
+            try:
+                self.choices.get(user_choice)()
+            except FileNotFoundError:
+                print("File doesn't exist")
+    
+    def display_sub_menu_settings(self):
+        menu.show_sub_menu()
+        user_choice = menu.get_choice()
+        self.choices_sub_menu_settings.get(user_choice)()
 
+    def sub_menu_change_event_files_path(self):
+        new_path = input("New path: ")
+        operations.change_event_files_path(new_path)
+
+    def sub_menu_change_match_files_path(self):
+        new_path = input("New path: ")
+        operations.change_team_files_path(new_path)
+            
     def quit(self):
         self.is_running = False
 
-db.create_db()
-Manager()
+if __name__ == "__main__":
+    Manager()

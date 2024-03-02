@@ -2,6 +2,7 @@ import os
 import re
 import json
 import db
+import pandas as pd
 
 CONFIG_FILE = "config.json"
 
@@ -16,9 +17,56 @@ def read_and_archive_teams_json():
 
     for file in os.listdir(files_path):
         if pattern.match(file):
-                teams = pd.read_json(f"{files_path}/{file}")
-                print(teams.transpose())
+                teams = pd.read_json(f"{files_path}/{file}").transpose()
                 os.rename(f"{files_path}/{file}", f"Archive/{file}")
+                league = file.replace("Teams.json", "")
+                db.add_team(teams, league)
+
+
+def read_and_archive_raw_data_json():
+    with open(CONFIG_FILE, "r") as f:
+        config_data = json.load(f)
+
+    leagues = config_data["leagues"]
+    files_path = config_data["files_path"]
+    pattern = re.compile(r"^(" + '|'.join(leagues) + r")\d+.json$")
+
+    for file in os.listdir(files_path):
+        if pattern.match(file):
+                with open(f"{files_path}/{file}") as data_file:
+                    events = json.load(data_file)
+                df = pd.json_normalize(events, "events", ["home_team", "away_team", "league", "external_match_id"],
+                            record_prefix="events_")
+                df_matches = pd.DataFrame(df.where(df["events_event"] == "match_start"))
+                df_matches = df_matches.dropna(how='all')
+                df_matches["is_finished"] = 0 
+                league = re.sub("(\d|.json)", "", file)
+                db.add_match(df_matches, league)
+                db.add_event(df, league)
+                os.rename(f"{files_path}/{file}", f"Archive/{file}")
+
+def change_event_files_path(new_path):
+    # try:
+    with open(CONFIG_FILE, "r") as f:
+        config_data = json.load(f)
+    # except Exception:
+        # print("Config file not found")
+    # except ValueError:
+        # raise ValueError("Can't open JSON file")
+    config_data["event_files_path"] = new_path
+    with open(CONFIG_FILE, "w") as f:
+        json.dump(config_data, f)
+
+def change_team_files_path(new_path):
+    with open(CONFIG_FILE, "r") as f:
+        config_data = json.load(f)
+    config_data["team_files_path"] = new_path
+    with open(CONFIG_FILE, 'w') as f:
+        json.dump(config_data, f)
+
+
+def clear_console(func):
+    os.system("cls")
 
 
 def read_data_from_json(file_path):
@@ -32,9 +80,6 @@ def read_data_from_json(file_path):
 def add_read_data_to_db():
     data_from_file = read_data_from_json("test1.json")
     for data in data_from_file:
-            # db.add_event(event["event_name"], event["event_description"], event["player"], event["team"], event["match_time"])
-        # print(data["event_name"], data["event_description"], data["player"], data["team"], data["match_time"])
-        # print(data["events"])
         for event in data["events"]:
             db.add_event(event["event_name"], event["event_description"], event["player"], event["team"], event["match_time"], event["league"])
 
@@ -68,38 +113,5 @@ def add_teams_from_file(files_path):
         if filename.replace("Teams.json", "") in leagues and filename.endswith("Teams.json"):
             full_file_path = f"{files_path}/{filename}"
             teams = read_data_from_json(full_file_path)
-
-add_teams_from_file("Teams")
-
-# add_leagues_from_file()
-# add_leagues_from_file()
-
-# db.add_leagues(['Premier League', 'Bundesliga'])
-
-# d = read_data_from_json("test1.json")
-# for i in d:
-#     print(i["events"])
-
-# def get_config_data():
-#     result = {}
-
-#     with open(CONFIG_FILE, "r") as f:
-#         result = json.load(f)
-#     return result
-
-# def change_files_path():
-#     path = input("Files path: ")
-
-#     with open(CONFIG_FILE, "w") as f:
-#         try:
-#             get_config_data()
-#         except FileNotFound:
-            
-#         f.write(path)
-
-
-# def get_files_path():
-#     with open(CONFIG_FILE, "r") as f:
-#         files_path = f.read()
 
 
