@@ -29,10 +29,13 @@ def read_matches(league):
         df = pd.read_sql(query, conn)
       
 def add_leagues(league):
+    # with connect_to_db().begin() as conn:
+        # cursor = conn.cursor()
+        # cursor.execute("EXEC dbo.AddLeague ?", league)
+        # conn.commit()
+    query = f"EXEC dbo.AddLeague @LeagueName = '%s'"% (league)
     with connect_to_db().begin() as conn:
-        cursor = conn.cursor()
-        cursor.execute("EXEC dbo.AddLeague ?", league)
-        conn.commit()              
+        conn.execute(sqlalchemy.text(query))              
 
 def add_team(teams, league):
     with connect_to_db().begin() as conn:
