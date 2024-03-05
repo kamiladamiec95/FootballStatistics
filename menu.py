@@ -11,6 +11,7 @@ sub_menu_settings = (
     "1. Change event files path\n"
     "2. Change team files path\n"
     "3. Show files path\n"
+    "4. Back"
 )
 
 def show_menu():
