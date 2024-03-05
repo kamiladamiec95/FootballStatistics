@@ -12,10 +12,11 @@ def read_and_archive_teams_json():
         config_data = json.load(f)
 
     leagues = config_data["leagues"]
-    files_path = config_data["files_path"]
+    files_path = config_data["team_files_path"]
     pattern = re.compile(r"^(" + '|'.join(leagues) + r")Teams.json$")
 
     for file in os.listdir(files_path):
+        print(file)
         if pattern.match(file):
                 teams = pd.read_json(f"{files_path}/{file}").transpose()
                 os.rename(f"{files_path}/{file}", f"Archive/{file}")
@@ -28,12 +29,12 @@ def read_and_archive_raw_data_json():
         config_data = json.load(f)
 
     leagues = config_data["leagues"]
-    files_path = config_data["files_path"]
+    files_path = config_data["event_files_path"]
     pattern = re.compile(r"^(" + '|'.join(leagues) + r")\d+.json$")
 
     for file in os.listdir(files_path):
         if pattern.match(file):
-                with open(f"{files_path}/{file}") as data_file:
+                with open(f"{files_path}/{file}", encoding="utf-8") as data_file:
                     events = json.load(data_file)
                 df = pd.json_normalize(events, "events", ["home_team", "away_team", "league", "external_match_id"],
                             record_prefix="events_")
@@ -114,4 +115,10 @@ def add_teams_from_file(files_path):
             full_file_path = f"{files_path}/{filename}"
             teams = read_data_from_json(full_file_path)
 
+
+def sub_menu_show_files_path():
+    with open(CONFIG_FILE, "r") as f:
+        config_data = json.load(f)
+    for x, y in config_data.items():
+        print(x + ":", y)
 
