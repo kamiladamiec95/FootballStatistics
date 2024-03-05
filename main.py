@@ -14,7 +14,9 @@ class Manager:
         }
         self.choices_sub_menu_settings = {
             "1": self.sub_menu_change_event_files_path,
-            "2": self.sub_menu_change_match_files_path
+            "2": self.sub_menu_change_match_files_path,
+            "3": operations.sub_menu_show_files_path,
+            "4": self.sub_menu_go_to_main_menu
         }
         self.start()
 
@@ -22,10 +24,10 @@ class Manager:
         while self.is_running:
             menu.show_menu()
             user_choice = menu.get_choice()
-            try:
-                self.choices.get(user_choice)()
-            except FileNotFoundError:
-                print("File doesn't exist")
+            # try:
+            self.choices.get(user_choice)()
+            # except FileNotFoundError:
+                # print("File doesn't exist")
     
     def display_sub_menu_settings(self):
         menu.show_sub_menu()
@@ -39,6 +41,9 @@ class Manager:
     def sub_menu_change_match_files_path(self):
         new_path = input("New path: ")
         operations.change_team_files_path(new_path)
+    
+    def sub_menu_go_to_main_menu(self):
+        self.start()
             
     def quit(self):
         self.is_running = False
