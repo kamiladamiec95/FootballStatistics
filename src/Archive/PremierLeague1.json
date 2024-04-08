@@ -1,0 +1,38 @@
+[
+    {
+        "external_match_id": 1233333122,
+        "home_team": "Chelsea",
+        "away_team": "City",
+        "league": "Premier League",
+        "events":[
+            {"event": "Goal",
+                "player": "Klich",
+                "event_team": "home"
+            },
+            {"event": "Faul",
+            "player": "Ronaldo",
+            "event_team": "away"
+        }
+        ]
+     } ,
+     {  
+        "external_match_id": 12312312,
+        "home_team": "Bayern",
+        "away_team": "Lipsk",
+        "league": "Premier League",
+        "events":[
+            {"event": "match_start",
+                "player": "Klich",
+                "event_team": "home"
+            },
+            {"event": "Goal",
+            "player": "Ronaldo",
+            "event_team": "away"
+        },
+        {"event": "Goal",
+        "player": "Ronaldo",
+        "event_team": "away"
+    }
+        ]
+     }          
+]

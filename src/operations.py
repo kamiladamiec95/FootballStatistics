@@ -2,11 +2,10 @@ import os
 import re
 import json
 import db
-import pandas as pd
+# import pandas as pd
 
 CONFIG_FILE = "config.json"
 
-# Czy nie rozbić tego na dwie funkcje?
 def read_and_archive_teams_json():
     with open(CONFIG_FILE, "r") as f:
         config_data = json.load(f)
@@ -16,7 +15,6 @@ def read_and_archive_teams_json():
     pattern = re.compile(r"^(" + '|'.join(leagues) + r")Teams.json$")
 
     for file in os.listdir(files_path):
-        print(file)
         if pattern.match(file):
                 teams = pd.read_json(f"{files_path}/{file}").transpose()
                 os.rename(f"{files_path}/{file}", f"Archive/{file}")
@@ -41,7 +39,7 @@ def read_and_archive_raw_data_json():
                 df_matches = pd.DataFrame(df.where(df["events_event"] == "match_start"))
                 df_matches = df_matches.dropna(how='all')
                 df_matches["is_finished"] = 0 
-                league = re.sub("(\d|.json)", "", file)
+                league = re.sub(r"(\d|.json)", "", file)
                 db.add_match(df_matches, league)
                 db.add_event(df, league)
                 os.rename(f"{files_path}/{file}", f"Archive/{file}")

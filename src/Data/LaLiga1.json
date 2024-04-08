@@ -1,0 +1,45 @@
+[
+    {
+        "external_match_id": 1233333122,
+        "home_team": "UD Almería",
+        "away_team": "Rayo Vallecano",
+        "league": "LaLiga",
+        "events":[
+            {"event": "match_start",
+                "player": "-",
+                "event_team": "-"
+            },
+            {"event": "goal",
+                "player": "Palazon I.",
+                "event_team": "away"
+            },
+            {"event": "goal",
+            "player": "Nteka R.",
+            "event_team": "away"
+            },
+            {"event": "yellow_card",
+            "player": "Lopez U.",
+            "event_team": "away"
+            },
+            {"event": "yellow_card",
+            "player": "Garcia A.",
+            "event_team": "away"
+            },
+            {"event": "yellow_card",
+            "player": "Valentin O.",
+            "event_team": "away"
+            },
+            {"event": "yellow_card",
+            "player": "Ramazani L.",
+            "event_team": "home"
+            },
+            {"event": "match_end",
+            "player": "-",
+            "event_team": "-"
+            }
+        ]
+     }         
+]
+
+
+

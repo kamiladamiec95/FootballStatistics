@@ -1,0 +1,14 @@
+{
+    "Bayern":{
+        "short_name": "Chelsea",
+        "long_name": "Chelsea Football Club",
+        "founding_date": "1905-03-10",
+        "addres": "Fulham Road SW6 1HS London"
+     } ,
+     "Lipsk":{
+        "short_name": "Manchester United",
+        "long_name": "Manchester United Football Club",
+        "founding_date": "1878-03-05",
+        "addres": "Sir Matt Busby Way Old Trafford M16 0RA Manchester"
+     }         
+}

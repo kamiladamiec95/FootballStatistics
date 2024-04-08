@@ -1,0 +1,32 @@
+[
+    {
+        "external_match_id": 1233333124,
+        "home_team": "Sevilla FC",
+        "away_team": "Valencia CF",
+        "league": "LaLiga",
+        "events":[
+            {"event": "yellow_card",
+                "player": "Rakitic I.",
+                "event_team": "home"
+            },
+            {"event": "yellow_card",
+                "player": "Rakitic I.",
+                "event_team": "home"
+            },
+            {"event": "yellow_card",
+            "player": "Diakhaby M.",
+            "event_team": "away"
+            }
+            ,
+            {"event": "goal",
+            "player": "Diakhaby M.",
+            "event_team": "away"
+            }
+            ,
+            {"event": "red_card",
+            "player": "Diakhaby M.",
+            "event_team": "home"
+            }
+        ]
+     }         
+]

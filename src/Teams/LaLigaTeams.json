@@ -1,0 +1,123 @@
+{
+    "Real Madrid":{
+        "short_name": "Real Madrid",
+        "long_name": "Real Madrid Club de Fútbol",
+        "founding_date": "1902-03-06",
+        "addres": "Concha Espina 1, 28036 Madrid"
+     } ,
+     "FC Barcelona":{
+        "short_name": "FC Barcelona",
+        "long_name": "Futbol Club Barcelona",
+        "founding_date": "1899-11-29",
+        "addres": "Artístides Maillol s/n 08028 Barcelona"
+     } ,
+     "Atlético de Madrid":{
+        "short_name": "Atlético de Madrid",
+        "long_name": "Club Atlético de Madrid S.A.D.",
+        "founding_date": "1903-04-26",
+        "addres": "Av. de Luis Aragonés 4, 28022 Madrid"
+     } ,
+     "Girona FC":{
+        "short_name": "Girona FC",
+        "long_name": "Girona Fútbol Club S.A.D.",
+        "founding_date": "1930-07-23",
+        "addres": "Av. Montilivi 141, 17003 Girona"
+     } ,
+     "Athletic Bilbao":{
+        "short_name": "Athletic Bilbao",
+        "long_name": "Athletic Club",
+        "founding_date": "1898-01-01",
+        "addres": "Ibaigane, Alameda de Mazarredo 23, 48009 Bilbao"
+     } ,
+     "Real Betis":{
+        "short_name": "Real Betis",
+        "long_name": "Real Betis Balompié S.A.D.",
+        "founding_date": "1907-09-12",
+        "addres": "Av. de Glorieta Heliópolis s/n, 41012 Sevilla"
+     } ,
+     "Real Sociedad":{
+        "short_name": "Real Sociedad",
+        "long_name": "Real Sociedad de Fútbol, S.A.D.",
+        "founding_date": "1909-09-07",
+        "addres": "Anoeta pasalekua 1, 20014 San Sebastián"
+     } ,
+     "UD Las Palmas":{
+        "short_name": "UD Las Palmas",
+        "long_name": "Unión Deportiva Las Palmas, S.A.D.",
+        "founding_date": "1949-08-22",
+        "addres": "Calle Germán Dévora Ceballos s/n, 35019 Las Palmas de Gran Canaria"
+     } ,
+     "Valencia CF":{
+        "short_name": "Valencia CF",
+        "long_name": "Valencia Club de Fútbol, S.A.D.",
+        "founding_date": "1919-03-18",
+        "addres": "Plaza del Valencia Club de Futbol Nº2, 46010 Valencia"
+     } ,
+     "Getafe CF":{
+        "short_name": "Getafe CF",
+        "long_name": "Getafe Club de Fútbol S.A.D.",
+        "founding_date": "1983-08-29",
+        "addres": "Av. Teresa de Calcuta s/n, 28903 Getafe"
+     } ,
+     "CA Osasuna":{
+        "short_name": "CA Osasuna",
+        "long_name": "Club Atlético Osasuna",
+        "founding_date": "1935-11-10",
+        "addres": "C. del Sadar, s/n, 31006 Pamplona, Navarra"
+     } ,
+     "Deportivo Alavés":{
+        "short_name": "Deportivo Alavés",
+        "long_name": "Deportivo Alavés, S.A.D.",
+        "founding_date": "1921-01-23",
+        "addres": "Paseo de Cervantes, 01007 Vitoria-Gasteiz"
+     } ,
+     "Villarreal CF":{
+        "short_name": "Villarreal CF",
+        "long_name": "Villarreal Club de Fútbol, S.A.D.",
+        "founding_date": "1923-03-10",
+        "addres": "Avenida B. Ibáńez 2, 12540 Vila-real"
+     } ,
+     "Rayo Vallecano":{
+        "short_name": "Rayo Vallecano",
+        "long_name": "Rayo Vallecano de Madrid S.A.D.",
+        "founding_date": "1924-05-29",
+        "addres": "Calle del Payaso Fofo s/n, 28018 Madrid"
+     } ,
+     "Sevilla FC":{
+        "short_name": "Sevilla FC",
+        "long_name": "Sevilla Fútbol Club, S.A.D.",
+        "founding_date": "1890-01-25",
+        "addres": "Av. Eduardo Dato, s/n 41005 Sevilla"
+     } ,
+     "Celta de Vigo":{
+        "short_name": "Celta de Vigo",
+        "long_name": "Real Club Celta de Vigo S.A.D.",
+        "founding_date": "1923-08-23",
+        "addres": "Conde de Gondomar 1, 36203 Vigo"
+     } ,
+     "RCD Mallorca":{
+        "short_name": "RCD Mallorca",
+        "long_name": "Real Club Deportivo Mallorca, S.A.D.",
+        "founding_date": "1916-03-05",
+        "addres": "Camí dels Reis 126, 07013 Palma"
+     } ,
+     "Cádiz CF":{
+        "short_name": "Cádiz CF",
+        "long_name": "Cádiz Club de Fútbol S.A.D.",
+        "founding_date": "1910-09-30",
+        "addres": "Plaza de Madrid s/n, 11010 Cádiz"
+     } ,
+     "Granada CF":{
+        "short_name": "Granada CF",
+        "long_name": "Granada Club de Fútbol, S.A.D.",
+        "founding_date": "1931-04-14",
+        "addres": "Avda. Pintor Manuel Maldonado s/n, 18007 Granada"
+     } ,
+     "UD Almería":{
+        "short_name": "UD Almería",
+        "long_name": "Unión Deportiva Almería, S.A.D.",
+        "founding_date": "1989-07-26",
+        "addres": "C. Alcalde Santiago Martínez Cabrejas, 5, 04007 Almería"
+     }                              
+}
+

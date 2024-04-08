@@ -3,7 +3,8 @@ import sqlalchemy
 import pandas as pd
 
 def connect_to_db():
-    engine = sqlalchemy.create_engine('mssql+pyodbc://@DESKTOP-DVUVJ0H/FootballStatistics?trusted_connection=yes&driver=ODBC+Driver+17+for+SQL+Server')
+    # engine = sqlalchemy.create_engine('mssql+pyodbc://@DESKTOP-DVUVJ0H/FootballStatistics?trusted_connection=yes&driver=ODBC+Driver+17+for+SQL+Server')
+    engine = sqlalchemy.create_engine("mssql+pymssql://sa:YourStrongPassw0rd@localhost:1401/FootballStatistics")
     return engine
 
 def add_event(events, league):
@@ -13,7 +14,6 @@ def add_event(events, league):
         events.to_sql(name="RawData", if_exists='append', con=conn, index=False, schema=f"{league}")
 
 def add_match(events, league):
-    print(events)
     for index, row in events.iterrows():
         home_team = row["home_team"]
         away_team = row["away_team"]
